@@ -1,0 +1,6 @@
+# voice pipeline artefakti (modeli in generiran zvok se ne commitajo)
+voice/voices/
+voice/test_output/
+voice/.last_reply.wav
+__pycache__/
+*.pyc

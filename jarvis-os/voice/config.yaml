@@ -1,0 +1,31 @@
+# Jarvis OS — voice pipeline konfiguracija
+# Vse člene pipeline-a (STT / Claude / TTS) nastavljaš tukaj.
+
+stt:
+  model: small          # tiny | base | small | medium | large-v3 (faster-whisper)
+  language: sl          # jezik govora v mikrofon (whisper podpira sl)
+  device: cpu           # cpu | cuda
+  compute_type: int8    # int8 = hitro na CPU; float16 za GPU
+
+tts:
+  engine: auto          # auto = piper če je glas na voljo, sicer espeak
+  # Piper (naraven glas). POZOR: slovenskega glasu v uradnem piper
+  # katalogu NI (stanje 2026-07) — zato je privzeti glas angleški.
+  piper_voice: en_US-lessac-medium
+  piper_voices_dir: voices        # relativno na voice/ mapo
+  # espeak-ng fallback (robotski, a podpira slovenščino in dela offline)
+  espeak_voice: sl
+  espeak_speed: 160
+
+audio:
+  sample_rate: 16000    # Hz za snemanje (whisper native = 16 kHz)
+  channels: 1
+  input_device: null    # null = privzeti mikrofon; seznam: python3 -m sounddevice
+  output_device: null   # null = privzeti zvočnik
+
+claude:
+  command: claude       # Claude Code CLI
+  extra_args: []        # npr. ["--model", "sonnet"]
+  timeout: 180          # sekund za odgovor
+
+mode: push_to_talk      # Enter = začni snemati, Enter = ustavi
